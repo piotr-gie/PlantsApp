@@ -1,36 +1,49 @@
-﻿@model Weather
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
-<head>
-    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
-</head>
-<h1> What a perfect day to plant some tomatoes!</h1>
 
 @{
-    var numOfFields = 10;
-    var sizeOfField = 50;
-    var sizeOfGarden = numOfFields * sizeOfField;
-    <canvas id="myCanvas" width=@sizeOfGarden height=@sizeOfGarden style="border:1px solid #000000;background-color: #a1761e;"> </canvas>
-
-    for (var i = 0; i < numOfFields; i++)
-    {
-        <script>
-     var canvas = document.getElementById("myCanvas");
-     var ctx = canvas.getContext("2d");
-            ctx.fillStyle = "#FF0000";
-            //drawing horizontal lines
-            ctx.beginPath();
-            ctx.moveTo(0,@i*@sizeOfField);
-            ctx.lineTo(@sizeOfGarden,@i*@sizeOfField);
-            ctx.stroke();
-            //drawing vertical lines
-            ctx.beginPath();
-            ctx.moveTo(@i*@sizeOfField,0);
-            ctx.lineTo(@i*@sizeOfField,@sizeOfGarden);
-            ctx.stroke();
-
-
-        </script>
-    }
+    var plants = (List<Plant>)ViewData["Plants"]; // Cast the list
+    var fields = (List<Field>)ViewData["Fields"]; // Cast the list
 }
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/index.css" type="text/css" />
+</head>
+
+<h1> What a perfect day to plant some tomatoes!</h1>
+<div class="grid">
+    @{
+        @foreach (var field in fields)
+        {
+            
+            Plant plant = plants.Where(x => x.Id == field.PlantId).FirstOrDefault();
+            <div class="grid__element" data-id="field_@(field.Id%100)" style="background-color: #@(field.PlantId!=0 ? plant.Colour : "392900")">
+                <a asp-action="SowField" asp-controller="Game" asp-route-id=@field.Id> @(field.Id%100) </a>
+            </div>
+        }
+
+    }
+</div>
+
+@*@{
+    @foreach (var field in fields)
+    {
+        
+        if (field.PlantId != 0){
+            <p> @field.PlantId</p>
+        }
+
+    }
+    foreach (Plant plant in plants)
+    {
+
+        <p> @plants.IndexOf(plant) - @plant.Id</p>
+
+        <br />
+
+    }
+}*@
+
+

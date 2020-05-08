@@ -14,5 +14,7 @@ namespace PlantsApp.Models
         }
 
         public DbSet<Seed> Seeds { get; set; }
+        public DbSet<Plant> Plant { get; set; }
+        public DbSet<Field> Field { get; set; }
     }
 }
