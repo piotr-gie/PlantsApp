@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    
+}
+
+@{
+    var plants = (List<Plant>)ViewData["Plants"]; // Cast the list
+    var fields = (List<Field>)ViewData["Fields"]; // Cast the list
+}
+    <head>
+        <link rel="stylesheet" href="~/css/site.css" type="text/css" />
+        <link rel="stylesheet" href="~/css/index.css" type="text/css" />
+    </head>
+<h1>Pick a seed:</h1>
+<form>
+    <button name="seed" value="tomato" asp-action="SeedButtonClick">tomato</button>
+    <button name="seed" value="potato" asp-action="SeedButtonClick">potato</button>
+</form>
+<div>
+    You have chosen @TempData["seedval"]
+</div>
+
+
+<h1> What a perfect day to plant some tomatoes!</h1>
+<div class="grid">
+    @{
+        @foreach (var field in fields)
+        {
+
+            Plant plant = plants.Where(x => x.Id == field.PlantId).FirstOrDefault();
+            <div class="grid__element" data-id="field_@(field.Id%100)" style="background-color: #@(field.PlantId!=0 ? "336600" : "392900")">
+               
+                <a asp-action="SowField" asp-controller="Game" asp-route-id=@field.Id asp-route-seed=@(TempData["seedval"]!=null ? TempData["seedval"] : "blank")><img src="~/img/@(field.PlantId!=0 ? plant.Colour : "blank").png" alt="empty"> </a>
+            </div>
+        }
+
+    }
+</div>
+
+

@@ -1,0 +1,12 @@
+﻿@model Weather
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Current weather</h1>
+
+<p>@Html.DisplayNameFor(model => model.City) : @Html.DisplayFor(model => model.City)</p>
+<p>@Html.DisplayNameFor(model => model.WeatherType) : @Html.DisplayFor(model => model.WeatherType)</p>
+<p>@Html.DisplayNameFor(model => model.Description) : @Html.DisplayFor(model => model.Description)</p>
+<p>@Html.DisplayNameFor(model => model.Temperature) : @Html.DisplayFor(model => model.Temperature) K</p>
+<p>@Html.DisplayNameFor(model => model.Humidity) : @Html.DisplayFor(model => model.Humidity)</p>
