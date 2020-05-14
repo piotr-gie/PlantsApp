@@ -1,11 +1,11 @@
 # PlantsApp
 
 ## Spis treści
-* [Opis projektu](#Opis projektu)
-* [Prezentacja projektu](#Prezentacja)
+* [Opis projektu](#Opis)
+* [Prezentacja działania](#Prezentacja)
 * [Autorzy](#Autorzy)
 
-## Opis projektu
+## Opis
 Projekt został wykonany w ASP .NET Core. Celem projektu była nauka języka C#.
 
 Założeniem projektu było, aby użytkownik mógł prowadzić wirtualną plantację roślin.
